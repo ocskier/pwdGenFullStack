@@ -1,0 +1,58 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: lightblue;
+}
+
+header {
+    text-align: center;
+    height: 80px;
+    font-size: 1.2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 926px;
+    padding: 20px;
+    background: white;
+}
+
+textarea {
+    border: 1px dashed grey;
+    height: 100px;
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+.btnDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-trigger,
+#copy {
+    background: red;
+    padding: 8px 20px;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+#copy {
+    background: grey;
+}
+
+.input-group-text p {
+    margin: 0 0 1px 15px;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "pwdgenfullstack",
+  "version": "1.0.0",
+  "description": "A password generator with Typescript and a Back-end Express Server",
+  "main": "server.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocskier/pwdGenFullStack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ocskier/pwdGenFullStack/issues"
+  },
+  "homepage": "https://github.com/ocskier/pwdGenFullStack#readme"
+}

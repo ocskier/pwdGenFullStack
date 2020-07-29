@@ -9,6 +9,6 @@
     "preserveConstEnums": true,
     "lib": ["es2015"]
   },
-  "include": ["*.ts", "test/*.ts"],
+  "include": ["*.ts", "routes/*.ts","test/*.ts"],
   "exclude": ["node_modules"]
 }

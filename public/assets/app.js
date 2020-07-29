@@ -16,25 +16,31 @@ const modal = document.querySelector('.modal-body');
 
 let filteredCharTypes = [];
 
-function generateCode () {
+async function generateCode () {
     let validCode = false;
-    let possibleCode = generatePossibleCode();
-    while(!validCode){
-        const filteredAllChars = allChars.filter((value,i)=>filteredCharTypes.indexOf(i) !== -1);
-        validCode = filteredAllChars.every(value=>value.find(char=>possibleCode.includes(char)));
-        if (!validCode) 
-          possibleCode=generatePossibleCode();
+    try {
+        let response = await generatePossibleCode();
+        let { possibleCode } = await response.json();
+        while(!validCode){
+            const filteredAllChars = allChars.filter((value,i)=>filteredCharTypes.indexOf(i) !== -1);
+            validCode = filteredAllChars.every(value=>value.find(char=>possibleCode.includes(char)));
+            if (!validCode) 
+              possibleCode = await generatePossibleCode();
+        }
+        pwdOutput.textContent = possibleCode;
+    } catch (err) {
+        console.log(err);
+        startOver('There was a problem generating the passcode!')
     }
-    pwdOutput.textContent = possibleCode;
 }
 function generatePossibleCode () {
-    let code = '';
-    for (let i = 0; i < passwordObj.length; i++) {
-        const randomCharType = Math.floor(Math.random()*filteredCharTypes.length);
-        const letter = allChars[filteredCharTypes[randomCharType]][Math.floor(Math.random()*allChars[filteredCharTypes[randomCharType]].length)];
-        code += letter;
-    }
-    return code
+    return fetch('/password',{
+        method: 'POST',
+        body: JSON.stringify({
+            ...passwordObj
+        }),
+        headers: { "Content-Type": "application/json" }
+    })
 }
 function startOver(msg) {
     alert(msg);
@@ -64,26 +70,3 @@ copyBtn.addEventListener('click', function(){
     pwdOutput.select();
     document.execCommand("copy",false,pwdOutput.textContent)
 })
-
-// Previous development with window alerts, prompts, and confirms 
-// Current implementation with bootstrap Modal
-
-// function askQuestions () {
-//     const passwordLength = parseInt(prompt('Enter a length of password from 8 to 126:', 8));
-//     if (passwordLength < 8 || passwordLength > 128 | !passwordLength) {
-//         startOver('Password length incorrect! Retry?');
-//     } else {
-//         passwordObj.length = passwordLength;
-//         let oneCharTypeSelected = false;
-//         passwordObj['answers']=[];
-//         for (let i = 0; i < passwordObj.questions.length; i++) {
-//             const charTypeAns = confirm(passwordObj.questions[i]);
-//             if (oneCharTypeSelected === false) {
-//                 oneCharTypeSelected = charTypeAns;
-//             }
-//             passwordObj['answers'].push(charTypeAns);
-//         }
-//         oneCharTypeSelected === true ? generateCode() : startOver('No valid char types entered! Retry?')
-//     }
-// }
-
